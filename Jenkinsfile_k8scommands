@@ -11,7 +11,7 @@ pipeline {
           containers:
           - name: ubuntu
             image: ubuntu
-            
+         '''               
     } //end of kubernetes
   } // end of agent
   stages {
