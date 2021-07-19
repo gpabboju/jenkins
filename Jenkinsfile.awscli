@@ -17,7 +17,8 @@ pipeline {
         spec:
           containers:
           - name: aws-cli 
-            image: amazon/aws-cli 
+            image: amazon/aws-cli
+      ''' 
     } // end of kubernetes
   }  // end of agent
   stages {
