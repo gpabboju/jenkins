@@ -1,0 +1,42 @@
+// In AWS-> IAM  create a User with name User1 and permissions AmazonEC2FullAccess.
+
+// In Jenkins-> Manage Jenkins -> Manage Plugins -> install the plugin CloudBees AWS Credentials.
+// In Jenkins-> Manage Credentials -> In 'Stores scoped to Jenkins' select Jenkins and Global credentials-> Add Credentials
+// -> Provide the details ID = aws-user1-id, Description = AWS User1, Access Key ID = Access Key Id of AWS user, Secret Access Key = Secret Access Key of AWS User
+
+
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          labels:
+            some-label: some-label-value
+        spec:
+          containers:
+          - name: aws-cli 
+            image: amazon/aws-cli 
+    } // end of kubernetes
+  }  // end of agent
+  stages {
+    stage('Run AWS-CLI') {
+      steps {
+        container('aws-cli') {
+          withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding', 
+                        credentialsId: 'aws-user1-id', 
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'      
+                ]]) {
+                    sh "aws sts get-caller-identity"
+            } // end of command
+
+        } // end of container
+        } // end of steps 
+      } // end of stage
+    } // end of stages
+  } // end of pipeline
+
+
