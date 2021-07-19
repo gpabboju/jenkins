@@ -1,4 +1,4 @@
-// In AWS-> IAM  create a User with name 'User1' and permissions 'EC2FullAccess'.
+// In AWS-> IAM  create a User with name 'User1' and permissions 'AmazonEC2FullAccess'.
 
 // In Jenkins-> Manage Jenkins -> Manage Plugins -> install the plugin 'CloudBees AWS Credentials'.
 // In Jenkins-> Manage Credentials -> In 'Stores scoped to Jenkins' select Jenkins and Global credentials-> Add Credentials
