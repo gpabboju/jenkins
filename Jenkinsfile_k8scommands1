@@ -1,0 +1,8 @@
+pipeline {
+  agent {
+    kubernetes {
+    //  yaml '''
+      sh 'java --version'
+   } // end of kubernetes
+  } // end of pipeline
+
