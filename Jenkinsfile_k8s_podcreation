@@ -1,0 +1,33 @@
+// yaml file to create a pod in kubernetes
+
+pipeline{
+  agent{
+    kubernetes{ 
+       yaml '''
+         apiVersion: v1
+         kind: Pod
+         metadata:
+           name: california
+         spec:
+           containers:
+           - name: california-c
+             image: subanipradad/californiaapp:1  
+       '''
+
+
+  } // end of kubernetes
+ } // end of agent
+
+   stages {
+       stage('Run california'){
+         steps{
+           container('california'){
+               sh 'ls'
+         } // end container
+        } // end of steps
+   } // end of stage
+
+
+ } // end of stages
+
+} // end of pipeline
