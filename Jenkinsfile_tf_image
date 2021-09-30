@@ -18,7 +18,7 @@ pipeline {
     stage('k8s commands') {
       steps {
         container('terraform') {
-          sh 'terraform -version'
+          sh 'java -version'
         } // end of container
         
         } // end of steps
